@@ -199,13 +199,17 @@
 			varying float z;
 			uniform vec3 color;
 			void main() {
+        vec3 normalisedBirdColor = vec3(206., 205., 249.);
 				// Fake colors for now
-				float z2 = 0.2 + ( 1000. - z ) / 1000. * vColor.x;
-				gl_FragColor = vec4( z2, z2, z2, 1. );
+				float zR = 0.2 + ( 1000. - z ) / 1000. * vColor.x * (normalisedBirdColor.x/255.);
+        float zG= 0.2 + ( 1000. - z ) / 1000. * vColor.x * (normalisedBirdColor.y/255.);
+        float zB = 0.2 + ( 1000. - z ) / 1000. * vColor.x * (normalisedBirdColor.z/255.);
+				gl_FragColor = vec4( zR, zG, zB, 1. );
 			}
 		</script>
 
-      <script src="/public/js/main.js"></script>
+    <!-- Apply code in main.js -->
+    <script src="/public/js/main.js"></script>
 
 	</body>
 </html>

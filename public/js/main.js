@@ -60,7 +60,7 @@ THREE.BirdGeometry = function () {
 		var y = ~~(i / WIDTH) / WIDTH;
 		var c = new THREE.Color(
 			0x444444 +
-			~~(v / 9) / BIRDS * 0x666666
+			~~(v / 9) / BIRDS * 0x999999
 		);
 		birdColors.array[ v * 3 + 0 ] = c.r;
 		birdColors.array[ v * 3 + 1 ] = c.g;
