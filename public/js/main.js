@@ -8,7 +8,7 @@ var hash = document.location.hash.substr( 1 );
 if (hash) hash = parseInt(hash, 0);
 
 /* TEXTURE WIDTH FOR SIMULATION */
-var WIDTH = hash || 32;
+var WIDTH = hash || 16;
 var BIRDS = WIDTH * WIDTH;
 
 // Custom Geometry - using 3 triangles each. No UVs, no normals currently.
@@ -79,21 +79,41 @@ var mouseX = 0, mouseY = 0;
 var windowHalfX = window.innerWidth / 2;
 var windowHalfY = window.innerHeight / 2;
 var BOUNDS = 800, BOUNDS_HALF = BOUNDS / 2;
-document.getElementById('birds').innerText = BIRDS;
+document.getElementById('currentNrOfBirds').innerText = "Current number of birds is " + BIRDS;
 
-function change(n) {
-	location.hash = n;
+// Update nr of birds on button and enter click
+document.getElementById("applyBirdsButton").onclick = function() {applyBirds()};
+var input = document.getElementById("nrOfBirdsInput");
+input.addEventListener("keyup", function(event) {
+  // Cancel the default action, if needed
+  event.preventDefault();
+  // Number 13 is the "Enter" key on the keyboard
+  if (event.keyCode === 13) {
+    // Trigger the button element with a click
+    document.getElementById("applyBirdsButton").click();
+  }
+});
+
+function applyBirds() {
+  value = document.getElementById("nrOfBirdsInput").value;
+  nrOfBirds = Math.pow(2,value);
+	location.hash = nrOfBirds;
 	location.reload();
-	return false;
+	//return false;
 }
+// function change(n) {
+// 	location.hash = n;
+// 	location.reload();
+// 	return false;
+// }
 
-var options = '';
-for (i=1; i<7; i++) {
-	var j = Math.pow(2, i);
-	options += '<a href="#" onclick="return change(' + j + ')">' + (j * j) + '</a> ';
-}
+// var options = '';
+// for (i=1; i<7; i++) {
+// 	var j = Math.pow(2, i);
+// 	options += '<a href="#" onclick="return change(' + j + ')">' + (j * j) + '</a> ';
+// }
+//document.getElementById('options').innerHTML = options;
 
-document.getElementById('options').innerHTML = options;
 var last = performance.now();
 var gpuCompute;
 var velocityVariable;
@@ -105,6 +125,9 @@ var birdUniforms;
 init();
 animate();
 
+
+//------------------------- Functions ------------------------------------------
+//------------------------------------------------------------------------------
 function init() {
 	container = document.createElement( 'div' );
 	document.body.appendChild( container );

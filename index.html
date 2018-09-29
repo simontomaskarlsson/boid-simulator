@@ -21,9 +21,12 @@
 	</head>
 	<body>
     <div id="info">
-      <span id="birds"></span><br/>
-      Select <span id="options"></span> birds<br/>
-      Move mouse to disturb birds.
+      <span id="currentNrOfBirds"></span><br/>
+      Change number of birds<br/>
+      (Choose the 2^<sup>2x</sup> value):<br/>
+      x = <input type="text" value="" id="nrOfBirdsInput"></input>
+      <button type="button" id="applyBirdsButton">Apply</button><br/>
+      Move mouse to disturb the birds.
 
     </div>
 
@@ -199,7 +202,7 @@
 			varying float z;
 			uniform vec3 color;
 			void main() {
-        vec3 normalisedBirdColor = vec3(206., 205., 249.);
+        vec3 normalisedBirdColor = vec3(226., 225., 0.);
 				// Fake colors for now
 				float zR = 0.2 + ( 1000. - z ) / 1000. * vColor.x * (normalisedBirdColor.x/255.);
         float zG= 0.2 + ( 1000. - z ) / 1000. * vColor.x * (normalisedBirdColor.y/255.);
