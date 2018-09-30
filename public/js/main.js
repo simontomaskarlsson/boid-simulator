@@ -172,7 +172,7 @@ function init() {
 }
 
 function initComputeRenderer() {
-			gpuCompute = new GPUComputationRenderer( WIDTH, WIDTH, renderer );
+	gpuCompute = new GPUComputationRenderer( WIDTH, WIDTH, renderer );
 	var dtPosition = gpuCompute.createTexture();
 	var dtVelocity = gpuCompute.createTexture();
 	fillPositionTexture( dtPosition );
@@ -291,7 +291,8 @@ function animate() {
 
 function render() {
 	var now = performance.now();
-	var delta = (now - last) / 1000;
+  speed = document.getElementById('speedSlider').value / 100000;
+	var delta = (now - last) * speed;
 	if (delta > 1) delta = 1; // safety cap on large deltas
 	last = now;
 	positionUniforms.time.value = now;

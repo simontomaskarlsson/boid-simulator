@@ -17,3 +17,7 @@ a {
 	top: 10px;
 	width: 100%;
 }
+
+#slider {
+  margin-left: -70rem;
+}
